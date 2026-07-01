@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+	<head>
+		<meta charset="UTF-8" />
+		<title>Café Dev - O combustível do programador</title>
+
+		<style>
+			/* 5. Propriedades CSS e Modelo de Caixa (Box Model) */
+			body {
+				/* Nova combinação de fontes modernas */
+				font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+				background-color: #eef2f3; /* Fundo cinza bem claro/azuloso */
+				margin: 0;
+				color: #333333;
+			}
+
+			/* Cabeçalho com nova cor (Azul Petróleo Escuro) */
+			header {
+				background-color: #2c3e50;
+				color: white;
+				text-align: center;
+				padding-top: 15px; /* Mais espaçamento interno */
+        padding-bottom: 10px;
+			}
+      header h1 {
+        font-family: 'Times New Roman', Times, serif
+      }
+      nav {
+        border-top: 1px solid #eef2f3;
+      }
+      nav ul {
+        list-style: none;
+        display: flex;
+        justify-content: center;
+        padding-top: 10px;
+      }
+
+      nav a{
+        color: #e67e22;
+        padding: 20px;
+        font-weight: bolder;
+        font-size: large;
+      }
+
+			/* Bloco principal centralizado com novas proporções */
+			main {
+				width: 850px; /* Largura um pouco menor que o anterior */
+				margin: 25px auto; /* Margem de 25px acima/abaixo e centralizado nas laterais */
+				background-color: white;
+				padding: 25px;
+				border-radius: 12px; /* Cantos ainda mais arredondados e modernos */
+			}
+
+			/* Espaçamento entre as seções */
+			section {
+				margin-bottom: 35px;
+			}
+
+			/* Estilização da imagem */
+			img {
+				width: 100%;
+				border-radius: 20px; /* Acompanha o arredondamento do main */
+			}
+
+			/* Rodapé combinando com o cabeçalho */
+			footer {
+				background-color: #2c3e50;
+				color: white;
+				text-align: center;
+				padding: 20px;
+			}
+
+			/* Estilização dos Links - Nova cor (Laranja/Abóbora) */
+			a {
+				color: #e67e22;
+				font-weight: bold;
+				text-decoration: none; /* Remove o sublinhado padrão */
+			}
+
+			/* 4. Pseudo-classe Hover (Efeito ao passar o mouse) */
+			a:hover {
+				text-decoration: underline; /* O sublinhado aparece apenas no foco */
+				color: #d35400; /* Muda para um tom de laranja mais escuro */
+			}
+		</style>
+	</head>
+
+	<body>
+		<header>
+			<h1>Café Dev</h1>
+			<p>O combustível ideal para o seu código e o seu deploy</p>
+      <nav>
+        <ul>
+          <li> <a href="#inicio"> Inicio  </a> </li>
+          <li> <a href="#Menu"> Menu    </a> </li>
+          <li> <a href="#Contato"> Contato </a> </li>
+        </ul>
+      </nav>
+		</header>
+
+		<main>
+			<section>
+				<h2>Nossa Proposta</h2>
+				<p>
+					O Café Dev é um espaço projetado especialmente para desenvolvedores, 
+					estudantes e entusiastas da tecnologia. Aqui você encontra internet de alta 
+					velocidade, tomadas em todas as mesas e, claro, cafés especiais criados 
+					para aumentar sua produtividade.
+				</p>
+			</section>
+
+			<hr />
+
+			<section id=inicio>
+				<h2>Nosso Espaço</h2>
+				<img src="https://picsum.photos/850/350" alt="foto aleatoria" />
+				<p>Lorem Ipsum de imagens</p>
+			</section>
+
+			<hr />
+
+			<section id="Menu">
+				<h2>Menu Executivo</h2>
+				<p>Confira algumas de nossas opções temáticas:</p>
+				
+				<ul>
+					<li><strong>Café Espresso (Bug Fix):</strong> Forte, puro e focado.</li>
+					<li><strong>Cappuccino Creamy (CSS):</strong> Perfeitamente estilizado e cremoso.</li>
+					<li><strong>Pão de Queijo (Byte):</strong> Porção quentinha e crocante.</li>
+					<li><strong>Combo Full Stack:</strong> Um café grande acompanhado de uma fatia de bolo.</li>
+				</ul>
+			</section>
+
+			<hr />
+
+			<section id="Contato">
+				<h2>Onde Estamos?</h2>
+				<p>Venha codar com a gente! Para ver como chegar, clique no link abaixo:</p>
+				<p>
+					<a href="https://www.google.com/maps/place/Moura/@-10.9250959,-37.105284,17z/data=!4m10!1m2!2m1!1smoura+torta!3m6!1s0x71ab2423cbe905f:0x63e18ee668f7a078!8m2!3d-10.9262983!4d-37.1028175!15sCgttb3VyYSB0b3J0YVoNIgttb3VyYSB0b3J0YZIBCXNuYWNrX2JhcuABAA!16s%2Fg%2F11bycjr1_3!5m1!1e4?entry=ttu&g_ep=EgoyMDI2MDYyOC4wIKXMDSoASAFQAw%3D%3D" target="_blank"> 
+						Ver localização no Google Maps 
+					</a>
+				</p>
+			</section>
+		</main>
+
+		<footer>
+			<p>&copy; 2026 Café Dev. Todos os direitos reservados aos desenvolvedores cafeinados.</p>
+		</footer>
+	</body>
+</html>
