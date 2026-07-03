@@ -15,6 +15,10 @@
 					<li><a href="index.html"> Inicio </a></li>
 					<li><a href="menu.html"> Menu </a></li>
 					<li><a href="contato.html"> Contato </a></li>
+					<li class="btn-tema-container">
+						<button id="btn-tema">🌙 Modo Escuro</button>
+						<button id="abrir-carrinho">🛒 Carrinho</button>
+					</li>
 				</ul>
 			</nav>
 		</header>
@@ -29,49 +33,100 @@
 						<img src="https://picsum.photos/300/200?random=1" alt="Espresso Bug Fix" />
 						<h3>Espresso Bug Fix</h3>
 						<p>Ingredientes: Café espresso concentrado, grãos selecionados.</p>
-						<span class="preco">R$ 7,00</span>
+						<div class="preco-container">
+							<span class="preco">R$ 7.00</span>
+							<button
+								class="btn-adicionar"
+								data-nome="Espresso Bug Fix"
+								data-preco="7.00"
+							>
+								Adicionar
+							</button>
+						</div>
 					</div>
 
 					<div class="menu-item">
 						<img src="https://picsum.photos/300/200?random=2" alt="Cappuccino CSS" />
 						<h3>Cappuccino CSS</h3>
 						<p>Ingredientes: Leite vaporizado, canela em pó.</p>
-						<span class="preco">R$ 11,50</span>
+						<div class="preco-container">
+							<span class="preco">R$ 11.50</span>
+							<button class="btn-adicionar" data-nome="Cappuccino CSS" data-preco="11.50">
+								Adicionar
+							</button>
+						</div>
 					</div>
 
 					<div class="menu-item">
 						<img src="https://picsum.photos/300/200?random=3" alt="Pão de Queijo Byte" />
 						<h3>Pão de Queijo Byte</h3>
 						<p>Ingredientes: Polvilho azedo, queijo canastra.</p>
-						<span class="preco">R$ 6,00</span>
+						<div class="preco-container">
+							<span class="preco">R$ 6.00</span>
+							<button
+								class="btn-adicionar"
+								data-nome="Pão de Queijo Byte"
+								data-preco="6.00"
+							>
+								Adicionar
+							</button>
+						</div>
 					</div>
 
 					<div class="menu-item">
 						<img src="https://picsum.photos/300/200?random=4" alt="Latte Overclock" />
 						<h3>Latte Overclock</h3>
 						<p>Ingredientes: Café espresso, xarope de baunilha.</p>
-						<span class="preco">R$ 13,00</span>
+						<div class="preco-container">
+							<span class="preco">R$ 13.00</span>
+							<button
+								class="btn-adicionar"
+								data-nome="Latte Overclock"
+								data-preco="13.00"
+							>
+								Adicionar
+							</button>
+						</div>
 					</div>
 
 					<div class="menu-item">
 						<img src="https://picsum.photos/300/200?random=5" alt="Mocha Git Push" />
 						<h3>Mocha Git Push</h3>
 						<p>Ingredientes: Calda de chocolate, espuma de leite.</p>
-						<span class="preco">R$ 14,50</span>
+						<div class="preco-container">
+							<span class="preco">R$ 14.50</span>
+							<button class="btn-adicionar" data-nome="Mocha Git Push" data-preco="14.50">
+								Adicionar
+							</button>
+						</div>
 					</div>
 
 					<div class="menu-item">
 						<img src="https://picsum.photos/300/200?random=6" alt="Donut JavaScript" />
 						<h3>Donut JavaScript</h3>
 						<p>Ingredientes: Cobertura de chocolate, granulado colorido.</p>
-						<span class="preco">R$ 9,00</span>
+						<div class="preco-container">
+							<span class="preco">R$ 9.00</span>
+							<button
+								class="btn-adicionar"
+								data-nome="Donut JavaScript"
+								data-preco="9.00"
+							>
+								Adicionar
+							</button>
+						</div>
 					</div>
 
 					<div class="menu-item">
 						<img src="https://picsum.photos/300/200?random=7" alt="Toast Python" />
 						<h3>Toast Python</h3>
 						<p>Ingredientes: Pão integral tostado, creme de abacate.</p>
-						<span class="preco">R$ 16,00</span>
+						<div class="preco-container">
+							<span class="preco">R$ 16.00</span>
+							<button class="btn-adicionar" data-nome="Toast Python" data-preco="16.00">
+								Adicionar
+							</button>
+						</div>
 					</div>
 
 					<div class="menu-item">
@@ -81,7 +136,16 @@
 						/>
 						<h3>Waffle Cyber Security</h3>
 						<p>Ingredientes: Massa crocante, mel orgânico.</p>
-						<span class="preco">R$ 15,00</span>
+						<div class="preco-container">
+							<span class="preco">R$ 15.00</span>
+							<button
+								class="btn-adicionar"
+								data-nome="Waffle Cyber Security"
+								data-preco="15.00"
+							>
+								Adicionar
+							</button>
+						</div>
 					</div>
 
 					<div class="menu-item">
@@ -91,14 +155,37 @@
 						/>
 						<h3>Cold Brew Open Source</h3>
 						<p>Ingredientes: Café extraído a frio, rodelas de limão.</p>
-						<span class="preco">R$ 12,00</span>
+						<div class="preco-container">
+							<span class="preco">R$ 12.00</span>
+							<button
+								class="btn-adicionar"
+								data-nome="Cold Brew Open Source"
+								data-preco="12.00"
+							>
+								Adicionar
+							</button>
+						</div>
 					</div>
 				</div>
 			</section>
 		</main>
 
+		<div id="carrinho-lateral" class="carrinho-lateral">
+			<div class="carrinho-cabecalho">
+				<h2>Seu Pedido</h2>
+				<button id="fechar-carrinho">&times;</button>
+			</div>
+			<div id="carrinho-itens" class="carrinho-itens"></div>
+			<div class="carrinho-rodape">
+				<div id="carrinho-total">Total: R$ 0,00</div>
+				<button id="btn-pagar">💳 Confirmar e Pagar</button>
+			</div>
+		</div>
+
 		<footer>
 			<p>© 2026 Café Dev. Todos os direitos reservados aos desenvolvedores cafeinados.</p>
 		</footer>
+
+		<script src="script.js"></script>
 	</body>
 </html>

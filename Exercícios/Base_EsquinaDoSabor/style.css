@@ -1,24 +1,78 @@
-/* 5. Propriedades CSS e Modelo de Caixa (Box Model) */
-body {
-	font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-	background-color: #eef2f3;
-	margin: 0;
-	color: #333333;
+/* ==========================================================================
+   1. CONFIGURAÇÕES GERAIS E VARIÁVEIS DE AMBIENTE
+   ========================================================================== */
+
+/* Definição de Variáveis de Cores (Suporta Tema Claro por padrão) */
+:root {
+	--bg-principal: #eef2f3;
+	--bg-card: white;
+	--bg-header: #2c3e50;
+	--texto-principal: #333333;
+	--texto-secundario: #666666;
+	--cor-destaque: #e67e22;
+	--cor-destaque-hover: #d35400;
+	--bg-bloco-menu: #f8f9fa;
+	--borda: #e0e0e0;
 }
 
+/* Sobrescrita de Variáveis para o Tema Escuro */
+body.dark-theme {
+	--bg-principal: #1a252f;
+	--bg-card: #2c3e50;
+	--bg-header: #111a24;
+	--texto-principal: #f5f6fa;
+	--texto-secundario: #bdc3c7;
+	--cor-destaque: #f39c12;
+	--cor-destaque-hover: #e67e22;
+	--bg-bloco-menu: #34495e;
+	--borda: #455a64;
+}
+
+/* Reset básico de Box Model */
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+/* Base do Corpo da Página */
+body {
+	font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+	background-color: var(--bg-principal);
+	margin: 0;
+	color: var(--texto-principal);
+	transition:
+		background-color 0.3s,
+		color 0.3s;
+}
+
+/* Linhas divisórias estruturais */
+hr {
+	border: 0;
+	border-top: 1px solid var(--borda);
+}
+
+/* ==========================================================================
+   2. NAVEGAÇÃO E CABEÇALHO (HEADER)
+   ========================================================================== */
+
 header {
-	background-color: #2c3e50;
+	background-color: var(--bg-header);
 	color: white;
 	text-align: center;
 	padding-top: 15px;
 	padding-bottom: 10px;
+	position: relative;
 }
+
 header h1 {
 	font-family: "Times New Roman", Times, serif;
 }
+
 nav {
-	border-top: 1px solid #eef2f3;
+	border-top: 1px solid var(--bg-principal);
 }
+
 nav ul {
 	list-style: none;
 	display: flex;
@@ -26,24 +80,89 @@ nav ul {
 	padding-top: 10px;
 	margin: 0;
 	padding-bottom: 10px;
+	align-items: center;
 }
 
 nav a {
-	color: #e67e22;
+	color: var(--cor-destaque);
 	padding: 10px 20px;
 	font-weight: bolder;
 	font-size: large;
 }
 
+/* Links em Geral e Efeitos de Foco */
+a {
+	color: var(--cor-destaque);
+	font-weight: bold;
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+	color: var(--cor-destaque-hover);
+}
+
+/* ==========================================================================
+   3. BOTÕES GLOBAIS DE INTERAÇÃO (TEMA E ACESSO AO CARRINHO)
+   ========================================================================== */
+
+/* Botão de Alternância de Tema - Posicionamento Fixo (Canto Superior Direito) */
+#btn-tema {
+	position: fixed;
+	top: 20px;
+	right: 20px;
+	z-index: 1001; /* Garante visibilidade sobre qualquer elemento */
+	background-color: var(--cor-destaque);
+	color: white;
+	border: none;
+	padding: 10px 18px;
+	border-radius: 20px;
+	font-weight: bold;
+	cursor: pointer;
+	font-size: 0.9em;
+	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+	transition:
+		background-color 0.2s,
+		transform 0.2s;
+}
+
+#btn-tema:hover {
+	background-color: var(--cor-destaque-hover);
+	transform: scale(1.05);
+}
+
+/* Botão de Abrir Carrinho (Localizado no menu nav) */
+#abrir-carrinho {
+	background-color: var(--cor-destaque);
+	color: white;
+	border: none;
+	padding: 8px 15px;
+	border-radius: 20px;
+	font-weight: bold;
+	cursor: pointer;
+	font-size: 0.9em;
+	transition: background-color 0.2s;
+	margin: 0 5px;
+}
+
+#abrir-carrinho:hover {
+	background-color: var(--cor-destaque-hover);
+}
+
+/* ==========================================================================
+   4. LAYOUT PRINCIPAL E SEÇÕES (MAIN AREA)
+   ========================================================================== */
+
 main {
 	width: 850px;
 	margin: 25px auto;
-	background-color: white;
+	background-color: var(--bg-card);
 	padding: 25px;
 	border-radius: 12px;
+	transition: background-color 0.3s;
 }
 
-/* Modificador para a página de Menu ter um espaço maior */
+/* Modificador para expandir a área principal na página de Menu */
 main.main-menu {
 	width: 1100px;
 }
@@ -58,27 +177,18 @@ img {
 }
 
 footer {
-	background-color: #2c3e50;
+	background-color: var(--bg-header);
 	color: white;
 	text-align: center;
 	padding: 20px;
 	margin-top: 40px;
 }
 
-a {
-	color: #e67e22;
-	font-weight: bold;
-	text-decoration: none;
-}
+/* ==========================================================================
+   5. CARDÁPIO / GRID DO MENU E ANIMAÇÕES
+   ========================================================================== */
 
-a:hover {
-	text-decoration: underline;
-	color: #d35400;
-}
-
-/* --- NOVOS ESTILOS ADICIONADOS --- */
-
-/* Grade do Menu */
+/* Grade Organizadora dos Itens */
 .menu-grid {
 	display: grid;
 	grid-template-columns: repeat(3, 1fr);
@@ -86,50 +196,203 @@ a:hover {
 	margin-top: 25px;
 }
 
-/* Bloquinhos de pratos */
+/* Bloquinhos individuais dos pratos */
 .menu-item {
-	background-color: #f8f9fa;
-	border: 1px solid #e0e0e0;
+	background-color: var(--bg-bloco-menu);
+	border: 1px solid var(--borda);
 	border-radius: 12px;
 	padding: 15px;
 	text-align: center;
 	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+	/* Transição combinada para a expansão em escala (scale) e elevação */
 	transition:
-		transform 0.3s ease,
-		box-shadow 0.3s ease; /* Animação suave */
+		transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1),
+		box-shadow 0.3s ease;
 }
 
-/* Efeito Hover nos blocos do menu */
+/* Efeito Hover: Expansão fluida do card ao passar o mouse */
 .menu-item:hover {
-	transform: translateY(-5px); /* Move levemente para cima */
-	box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+	transform: scale(1.04) translateY(-3px);
+	box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
 }
 
 .menu-item img {
 	width: 100%;
-	height: 180px;
-	object-fit: cover; /* Garante que as imagens fiquem do mesmo tamanho sem distorcer */
+	height: 170px;
+	object-fit: cover;
 	border-radius: 8px;
 }
 
 .menu-item h3 {
-	margin: 12px 0 8px 0;
-	color: #2c3e50;
+	margin: 12px 0 6px 0;
+	color: var(--texto-principal);
 }
 
 .menu-item p {
 	font-size: 0.9em;
-	color: #666;
-	margin: 0 0 10px 0;
+	color: var(--texto-secundario);
+	margin: 0 0 12px 0;
+	min-height: 40px; /* Mantém os botões alinhados horizontalmente */
+}
+
+/* Alinhamento de Preço e Botão de Compra */
+.menu-item .preco-container {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-top: 10px;
 }
 
 .menu-item .preco {
 	font-weight: bold;
-	color: #e67e22;
+	color: var(--cor-destaque);
 	font-size: 1.1em;
 }
 
-/* Estilização do Formulário de Contato */
+.btn-adicionar {
+	background-color: var(--bg-header);
+	color: white;
+	border: none;
+	padding: 6px 12px;
+	border-radius: 6px;
+	cursor: pointer;
+	font-size: 0.85em;
+	font-weight: bold;
+	transition: background-color 0.2s;
+}
+
+.btn-adicionar:hover {
+	background-color: var(--cor-destaque);
+}
+
+/* ==========================================================================
+   6. CARRINHO LATERAL (SLIDE OUT PANEL)
+   ========================================================================== */
+
+/* Painel do carrinho oculto por padrão no lado direito */
+.carrinho-lateral {
+	position: fixed;
+	top: 0;
+	right: -350px;
+	width: 350px;
+	height: 100%;
+	background-color: var(--bg-card);
+	border-left: 2px solid var(--borda);
+	box-shadow: -5px 0 15px rgba(0, 0, 0, 0.15);
+	z-index: 1000;
+	display: flex;
+	flex-direction: column;
+	padding: 20px;
+	transition: right 0.3s ease-in-out; /* Efeito de deslizamento */
+}
+
+/* Classe de gatilho para abertura do painel via Javascript */
+.carrinho-lateral.aberto {
+	right: 0;
+}
+
+.carrinho-cabecalho {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	border-bottom: 2px solid var(--borda);
+	padding-bottom: 10px;
+	color: var(--texto-principal);
+}
+
+#fechar-carrinho {
+	background: none;
+	border: none;
+	font-size: 1.5em;
+	cursor: pointer;
+	color: var(--texto-secundario);
+}
+
+/* Área de Rolagem dos Itens Selecionados */
+.carrinho-itens {
+	flex: 1;
+	overflow-y: auto;
+	margin-top: 15px;
+}
+
+/* Listagem interna das linhas do carrinho */
+.carrinho-item-linha {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 10px 0;
+	border-bottom: 1px dashed var(--borda);
+}
+
+.info-item-carrinho {
+	display: flex;
+	flex-direction: column;
+	max-width: 60%;
+}
+
+.nome-prod {
+	font-weight: bold;
+	color: var(--texto-principal);
+}
+
+.preco-prod {
+	font-size: 0.9em;
+	color: var(--cor-destaque);
+}
+
+/* Controles de Quantidade (+ / -) */
+.controles-carrinho {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+}
+
+.controles-carrinho button {
+	background-color: var(--bg-bloco-menu);
+	border: 1px solid var(--borda);
+	color: var(--texto-principal);
+	width: 25px;
+	height: 25px;
+	cursor: pointer;
+	border-radius: 4px;
+	font-weight: bold;
+}
+
+/* Rodapé do Carrinho com Totalizadores e Checkout */
+.carrinho-rodape {
+	border-top: 2px solid var(--borda);
+	padding-top: 15px;
+}
+
+#carrinho-total {
+	font-size: 1.2em;
+	font-weight: bold;
+	text-align: right;
+	margin-bottom: 15px;
+	color: var(--texto-principal);
+}
+
+#btn-pagar {
+	width: 100%;
+	background-color: #27ae60;
+	color: white;
+	border: none;
+	padding: 12px;
+	font-size: 1.1em;
+	font-weight: bold;
+	border-radius: 6px;
+	cursor: pointer;
+	transition: background-color 0.2s;
+}
+
+#btn-pagar:hover {
+	background-color: #219653;
+}
+
+/* ==========================================================================
+   7. FORMULÁRIO DE CONTATO E FEEDBACK
+   ========================================================================== */
+
 .form-grupo {
 	margin-bottom: 15px;
 }
@@ -138,36 +401,35 @@ a:hover {
 	display: block;
 	font-weight: bold;
 	margin-bottom: 5px;
-	color: #2c3e50;
+	color: var(--texto-principal);
 }
 
 .form-grupo input,
 .form-grupo textarea {
 	width: 100%;
 	padding: 10px;
-	border: 1px solid #ccc;
+	border: 1px solid var(--borda);
+	background-color: var(--bg-bloco-menu);
+	color: var(--texto-principal);
 	border-radius: 6px;
-	box-sizing: border-box;
-	font-family: inherit;
 }
 
 .form-grupo textarea {
 	resize: vertical;
-	height: 120px;
+	height: 110px;
 }
 
 .form-grupo input:focus,
 .form-grupo textarea:focus {
 	outline: none;
-	border-color: #e67e22;
+	border-color: var(--cor-destaque);
 }
 
 button.btn-enviar {
-	background-color: #e67e22;
+	background-color: var(--cor-destaque);
 	color: white;
 	border: none;
 	padding: 12px 25px;
-	font-size: 1em;
 	font-weight: bold;
 	border-radius: 6px;
 	cursor: pointer;
@@ -175,5 +437,5 @@ button.btn-enviar {
 }
 
 button.btn-enviar:hover {
-	background-color: #d35400;
+	background-color: var(--cor-destaque-hover);
 }
