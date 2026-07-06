@@ -113,29 +113,7 @@ form.addEventListener("submit", function (event) {
 	let senha = document.getElementById("inputSenha").value;
 
 	//    victorbenevides4@gmail.com
-	let mail = email.split("@");
-	//    mail = [ victorbenevides4', 'gmail.com' ]
-	let dominio = mail[1].split(".");
-	if (mail.length !== 2) {
-		alert("Email inválido! O email deve conter um '@'.");
-		return; // break
-
-		// mail[1] = 'gmail.com'
-	} else if (dominio.length < 2) {
-		// gmail.com -> [ 'gmail', 'com' ] -> length = 2
-		alert("Email inválido! O domínio deve conter um '.'");
-		return; //break
-
-		//dominio[0] = 'gmail'
-	} else if (dominio[0].length < 2) {
-		alert("Dominio com tamanho insuficiente. Entre com um domínio válido!");
-		return;
-	}
-	// mail[0] = "victorbenevides4"
-	else if (!isNaN(parseInt(mail[0]))) {
-		alert("Email inválido! O nome de usuário não pode começar com um número.");
-		return;
-	} //break
+	//break
 	// if (typeof(mail[0][0]) === 'number'){
 
 	// }
