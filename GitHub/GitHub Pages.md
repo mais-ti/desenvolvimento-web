@@ -37,13 +37,13 @@ Vamos publicar o site do projeto Mais TI como o site oficial da organização no
 
    ![Formulário de criação de repositório](./imgs/1-cria-repo.png)
 
-   > [!IMPORTANT]
-   > Esse nome precisa ser **exatamente** `<nome-de-usuário>.github.io` (tudo minúsculo). É essa nomenclatura especial que faz o GitHub reconhecer o repositório como o site do seu perfil.
+> [!IMPORTANT]
+> Esse nome precisa ser **exatamente** `<nome-de-usuário>.github.io` (tudo minúsculo). É essa nomenclatura especial que faz o GitHub reconhecer o repositório como o site do seu perfil.
 
 3. Marque o repositório como **Public** e ative a opção **Add a README file**.
 
-   > [!IMPORTANT]
-   > Para usar o GitHub Pages gratuitamente (contas GitHub Free), o repositório precisa ser **público**.
+> [!IMPORTANT]
+> Para usar o GitHub Pages gratuitamente (contas GitHub Free), o repositório precisa ser **público**.
 
 4. Clique em **Create repository**.
 
