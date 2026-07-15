@@ -33,3 +33,12 @@ graph TD
     E -. volta .-> C
     F -. volta .-> C
 ```
+
+### Comando para criar os arquivos via terminal
+
+```bash
+mkdir -p sistema-passagens-web && cd sistema-passagens-web && \
+touch index.html index.js login.html login.js admin.html \
+admin-companhias.html admin-companhias.js admin-trechos.html admin-trechos.js \
+admin-cupons.html admin-cupons.js dados.js style.css
+```
