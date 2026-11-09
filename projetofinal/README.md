@@ -2,6 +2,12 @@
 
 ## Esquina do Sabor — Desenvolvimento de Aplicação Web
 
+**Versão 1.1**
+
+#### Atualização da versão 1.1
+
+- Inclusão do **Express.js** como framework do backend, executado com Node.js, para definir rotas e tratar requisições e respostas HTTP.
+
 ### 1. Apresentação do projeto
 
 Chegou o momento de colocar em prática os conhecimentos adquiridos durante as aulas do +TI!
@@ -99,6 +105,7 @@ O desenvolvimento utilizará como base as tecnologias trabalhadas durante o curs
 | CSS | Estilização, organização visual e layout |
 | JavaScript | Interatividade, manipulação do DOM, eventos, dados e cálculos |
 | Node.js | Execução do código JavaScript no backend |
+| Express.js | Framework do backend para definição de rotas e tratamento de requisições e respostas HTTP |
 | API HTTP | Comunicação entre frontend e backend |
 | CRUD | Operações básicas de criação, leitura, atualização e exclusão de dados |
 | Roteamento | Organização dos caminhos utilizados para acessar páginas ou funcionalidades da API |
@@ -106,11 +113,11 @@ O desenvolvimento utilizará como base as tecnologias trabalhadas durante o curs
 | SQL | Criação de tabelas e execução de consultas e operações CRUD no banco de dados |
 | JSON | Formato de troca de dados entre frontend e backend, quando necessário |
 
-O backend deverá utilizar uma implementação simples, com rotas, operações CRUD e apenas as funcionalidades necessárias para atender ao escopo definido.
+O backend deverá utilizar **Node.js com Express.js**, em uma implementação simples, com rotas, operações CRUD e apenas as funcionalidades necessárias para atender ao escopo definido.
 
 Não será necessário criar arquiteturas complexas, microsserviços ou múltiplas camadas de abstração.
 
-A escolha de bibliotecas para o backend, caso necessárias, será orientada conforme o conteúdo trabalhado nas aulas.
+A escolha de bibliotecas adicionais para o backend, caso necessárias, será orientada conforme o conteúdo trabalhado nas aulas.
 
 #### 5.1 Ferramentas opcionais
 
@@ -202,7 +209,7 @@ Nele serão implementados os elementos visuais, os controles de interação e os
 
 Será responsável por receber requisições, executar as operações necessárias e retornar respostas ao frontend.
 
-O arquivo `api.js` concentrará as funcionalidades básicas do servidor, incluindo:
+O arquivo `api.js` utilizará o Express.js e concentrará as funcionalidades básicas do servidor, incluindo:
 
 - Definição de rotas HTTP.
 - Recebimento de requisições.
