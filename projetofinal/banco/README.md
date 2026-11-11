@@ -4,9 +4,10 @@ Esta pasta contém o banco de dados SQLite utilizado pelo projeto e pelos exempl
 
 ```text
 banco/
-├── banco.db     # Arquivo SQLite com as tabelas e os registros
+├── banco.db    # Arquivo SQLite com as tabelas e os registros
+├── DER.md      # Diagrama e associação entre as entidades e as tabelas
 ├── imagens/    # Arquivos de imagem utilizados pelo cardápio
-└── readmd.md   # Explicação do banco e de suas tabelas
+└── README.md   # Explicação do banco, do DER e de suas tabelas
 ```
 
 ## Como o banco funciona
@@ -27,6 +28,40 @@ Os arquivos de imagem ficam em `imagens/`. O campo `imagem` da tabela `produtos`
 | `clientes` | Armazenar a identificação e o contato dos clientes |
 | `pedidos` | Registrar o cliente, o tipo de atendimento e a situação do pedido |
 | `itens_pedido` | Relacionar cada pedido aos produtos, quantidades e preços contratados |
+
+## Como ler o DER
+
+O **Diagrama Entidade-Relacionamento (DER)** representa visualmente as entidades do restaurante e suas associações. O arquivo [DER.md](DER.md) contém o diagrama completo em Mermaid, com os campos das quatro tabelas. Em uma visualização Markdown com suporte a Mermaid, o bloco é apresentado como um diagrama.
+
+Cada entidade do desenho corresponde a uma tabela: `CLIENTES` representa `clientes`, `PRODUTOS` representa `produtos`, `PEDIDOS` representa `pedidos` e `ITENS_PEDIDO` representa `itens_pedido`. As linhas dentro das entidades representam as colunas, seus tipos e as marcações de chave.
+
+| Marcação | Como interpretar neste banco |
+|---|---|
+| `PK` | Chave primária: o `id` identifica cada registro da tabela |
+| `FK` | Chave estrangeira: um campo guarda o id de um registro de outra tabela |
+| `UK` | Chave única: não pode haver dois clientes com o mesmo `cpf` |
+| `||` | Exatamente um registro no lado indicado |
+| `o{` | Zero ou muitos registros no lado indicado |
+| `1:N` | Um registro pode se associar a vários registros da outra tabela |
+| `N:N` | Vários pedidos podem conter vários produtos, por meio de `itens_pedido` |
+
+### Correspondência entre o diagrama e o banco
+
+| Relação no DER | Associação existente no SQLite | Leitura da cardinalidade |
+|---|---|---|
+| `CLIENTES` realiza `PEDIDOS` | `pedidos.cliente_id` referencia `clientes.id` | Um cliente tem zero ou muitos pedidos; cada pedido tem exatamente um cliente |
+| `PEDIDOS` contém `ITENS_PEDIDO` | `itens_pedido.pedido_id` referencia `pedidos.id` | Um pedido tem zero ou muitos itens; cada item pertence a exatamente um pedido |
+| `PRODUTOS` integra `ITENS_PEDIDO` | `itens_pedido.produto_id` referencia `produtos.id` | Um produto aparece em zero ou muitos itens; cada item referencia exatamente um produto |
+
+As três FKs são `NOT NULL`. Assim, **zero ou muitos** não significa que o campo de chave estrangeira aceita `NULL`: significa que um cliente pode não ter pedidos ou que um pedido pode ainda não ter itens. A FK obrigatória está no registro associado, que sempre precisa apontar para um registro principal existente quando a integridade referencial está ativa.
+
+### Por que existe a tabela itens_pedido
+
+Um pedido pode conter vários produtos e um produto pode aparecer em vários pedidos. Essa relação **N:N** é representada pela tabela associativa `itens_pedido`, formando duas relações **1:N**.
+
+Cada item une `pedido_id` e `produto_id` e acrescenta `quantidade` e `preco_unitario_centavos`. Ele tem uma PK própria, `id`, e uma restrição `UNIQUE (pedido_id, produto_id)`. Essa unicidade vale para o par; ela não impede que o mesmo pedido tenha produtos diferentes nem que o mesmo produto apareça em pedidos diferentes.
+
+O DER foi comparado com a estrutura de `banco.db`: as quatro entidades, os 23 campos e as três associações já estão implementados. Não é necessário acrescentar tabelas ou chaves estrangeiras para corresponder ao diagrama.
 
 ## 1. Tabela produtos
 
@@ -115,6 +150,17 @@ Nos exemplos de escrita, a conexão executa `PRAGMA foreign_keys = ON` para veri
 
 A tabela **`sqlite_sequence`** também aparece ao inspecionar o arquivo. Ela é interna do SQLite e controla a sequência de ids das tabelas com `AUTOINCREMENT`; não representa uma entidade do restaurante.
 
+### O que o DER não garante sozinho
+
+O desenho descreve a estrutura do banco. As restrições SQL e as chaves estrangeiras verificam os campos e os vínculos documentados, mas algumas regras precisam de lógica no backend, caso façam parte do escopo:
+
+- Exigir ao menos um item antes de confirmar um pedido: o banco permite pedidos sem itens.
+- Verificar disponibilidade ao adicionar um produto: a FK verifica a existência do produto, mas não seu campo `disponivel`.
+- Controlar alterações em pedidos concluídos e a sequência de mudanças de status: os valores de status são limitados, mas as transições não são definidas pelo esquema.
+- Calcular os dígitos verificadores do CPF: o `CHECK` existente verifica apenas o formato de 11 dígitos.
+
+A simulação do exemplo 05 já consulta a disponibilidade do produto. Isso não significa que as demais regras dessa lista estejam implementadas nos exemplos ou sejam requisitos adicionais do projeto.
+
 ## Valores em centavos e cálculo do total
 
 Os preços são guardados em centavos. Por exemplo, `1000` representa R$ 10,00 e `1250` representa R$ 12,50. Divida por 100 somente ao apresentar o valor em reais.
@@ -163,5 +209,6 @@ A simulação de pedido do exemplo 05 consulta disponibilidade e preço, mas nã
 Antes de uma prática de escrita, faça uma cópia do arquivo com os servidores parados. O roteiro explica esse procedimento e apresenta os comandos de execução.
 
 - [README principal: SQL de criação das tabelas](../README.md#estrutura-das-tabelas-fornecidas).
+- [DER: diagrama, chaves e associações com banco.db](DER.md).
 - [Catálogo de exemplos](../exemplos/README.md).
 - [Roteiro de prática com banco.db](../exemplos/ROTEIRO.md).
