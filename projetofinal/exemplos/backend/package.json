@@ -1,0 +1,21 @@
+{
+  "name": "esquina-do-sabor-exemplos",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Exemplos independentes e didáticos de Node.js, Express e SQLite",
+  "type": "commonjs",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "express": "node 01-express.js",
+    "crud": "node 02-crud.js",
+    "sqlite": "node 03-sqlite.js",
+    "http": "node 04-http.js",
+    "querystring": "node 05-querystring.js",
+    "arquivos": "node 06-fs.js"
+  },
+  "dependencies": {
+    "express": "5.1.0"
+  }
+}

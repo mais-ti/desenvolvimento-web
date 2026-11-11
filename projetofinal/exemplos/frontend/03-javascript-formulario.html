@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>03 — Formulário, eventos e cálculo</title>
+</head>
+<body>
+  <h1>Pastel: R$ 10,00</h1>
+  <!-- O navegador valida required, min e step antes de enviar o formulário. -->
+  <form id="pedido">
+    <!-- for conecta o rótulo ao campo que tem o mesmo id. -->
+    <label for="quantidade">Quantidade:</label>
+    <input id="quantidade" type="number" min="1" step="1" value="1" required>
+    <button type="submit">Calcular</button>
+  </form>
+  <p id="resultado" aria-live="polite">Escolha a quantidade e clique em Calcular.</p>
+
+  <!-- O script vem após o HTML para encontrar os elementos já criados. -->
+  <script>
+    // O DOM representa o HTML em objetos. Selecionamos os objetos pelos ids.
+    const formulario = document.querySelector('#pedido');
+    const campoQuantidade = document.querySelector('#quantidade');
+    const resultado = document.querySelector('#resultado');
+
+    // A função será executada quando houver um envio (clique ou Enter).
+    formulario.addEventListener('submit', function (evento) {
+      evento.preventDefault(); // Evita o recarregamento padrão do formulário.
+      const quantidade = Number(campoQuantidade.value); // value é um texto.
+      const total = quantidade * 10; // Cada pastel custa dez reais.
+
+      // Formata o número em reais e troca o texto visível do parágrafo.
+      resultado.textContent = total.toLocaleString('pt-BR', {
+        style: 'currency', currency: 'BRL'
+      });
+    });
+  </script>
+</body>
+</html>

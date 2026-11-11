@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>04 — Arrays, objetos, DOM e JSON</title>
+</head>
+<body>
+  <h1>Cardápio</h1>
+  <!-- A lista começa vazia e será preenchida pelo JavaScript. -->
+  <ul id="cardapio"></ul>
+  <h2>Os mesmos dados em JSON</h2>
+  <pre id="json"></pre>
+
+  <script>
+    // [] cria um array (lista). Cada {} cria um objeto com nome e preço.
+    const produtos = [
+      { nome: 'Pastel', preco: 10 },
+      { nome: 'Suco', preco: 5 }
+    ];
+    const lista = document.querySelector('#cardapio');
+
+    // forEach executa a função uma vez para cada produto do array.
+    produtos.forEach(function (produto) {
+      const item = document.createElement('li'); // Cria um li ainda fora da página.
+      item.textContent = produto.nome + ': R$ ' + produto.preco.toFixed(2);
+      lista.appendChild(item); // Coloca o li dentro do ul, tornando-o visível.
+    });
+
+    // JSON é texto para troca de dados; um objeto JavaScript não é um texto.
+    // stringify converte os objetos em texto JSON. O 2 adiciona indentação.
+    const textoJSON = JSON.stringify(produtos, null, 2);
+    document.querySelector('#json').textContent = textoJSON;
+    // O caminho inverso seria: const listaRecebida = JSON.parse(textoJSON).
+  </script>
+</body>
+</html>

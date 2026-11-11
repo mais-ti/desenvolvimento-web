@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>07 — Fetch e API</title>
+</head>
+<body>
+  <h1>Produtos da API</h1>
+  <!-- Este arquivo funciona com o backend 02 ou 03. Veja o README. -->
+  <form id="cadastro">
+    <label for="nome">Nome do produto:</label>
+    <input id="nome" required>
+    <!-- Categoria e preço também são obrigatórios na tabela produtos. -->
+    <label for="categoria">Categoria:</label>
+    <input id="categoria" required>
+    <label for="preco">Preço em centavos:</label>
+    <input id="preco" type="number" min="0" step="1" required>
+    <button type="submit">Cadastrar</button>
+  </form>
+  <button id="carregar" type="button">Carregar produtos</button>
+  <p id="mensagem" aria-live="polite"></p>
+  <ul id="produtos"></ul>
+
+  <script>
+    const lista = document.querySelector('#produtos');
+    const mensagem = document.querySelector('#mensagem');
+    const formulario = document.querySelector('#cadastro');
+    const campoNome = document.querySelector('#nome');
+    const campoCategoria = document.querySelector('#categoria');
+    const campoPreco = document.querySelector('#preco');
+
+    // async permite usar await para aguardar a resposta sem bloquear a página.
+    async function carregarProdutos() {
+      // Sem domínio na URL, usamos o mesmo servidor que entregou este HTML.
+      const resposta = await fetch('/api/produtos'); // GET é o método padrão.
+      if (!resposta.ok) throw new Error('Não foi possível carregar os produtos.');
+      const produtos = await resposta.json(); // Converte JSON em array de objetos.
+      lista.textContent = ''; // Limpa a lista para não repetir os itens.
+      produtos.forEach(function (produto) {
+        const item = document.createElement('li');
+        // O banco guarda centavos; só dividimos por 100 para exibir em reais.
+        const preco = (produto.preco_centavos / 100).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+        item.textContent = produto.id + ' — ' + produto.nome + ' (' + produto.categoria + ') — ' + preco;
+        lista.appendChild(item);
+      });
+      mensagem.textContent = 'Produtos carregados.';
+    }
+
+    document.querySelector('#carregar').addEventListener('click', async function () {
+      try {
+        await carregarProdutos();
+      } catch (erro) {
+        mensagem.textContent = erro.message; // Inclui falhas de rede e da API.
+      }
+    });
+
+    formulario.addEventListener('submit', async function (evento) {
+      evento.preventDefault(); // Enviamos com Fetch, sem recarregar a página.
+      try {
+        const resposta = await fetch('/api/produtos', {
+          method: 'POST', // POST solicita a criação de um registro.
+          headers: { 'Content-Type': 'application/json' }, // Informa o formato.
+          body: JSON.stringify({ // O objeto vira texto JSON para a API.
+            nome: campoNome.value,
+            categoria: campoCategoria.value,
+            preco_centavos: Number(campoPreco.value) // Enviamos um número inteiro.
+          })
+        });
+        if (!resposta.ok) {
+          const erro = await resposta.json();
+          throw new Error(erro.erro); // Exibe a explicação enviada pelo backend.
+        }
+        await carregarProdutos(); // Consulta a API para mostrar o novo produto.
+        formulario.reset(); // Limpa o campo após a operação bem-sucedida.
+      } catch (erro) {
+        mensagem.textContent = erro.message;
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>06 — React</title>
+</head>
+<body>
+  <h1>Quantidade com React</h1>
+  <!-- React controlará somente o conteúdo desta div. -->
+  <div id="app"></div>
+
+  <!-- type="module" permite importar JavaScript. Abra pelo servidor HTTP. -->
+  <script type="module">
+    // A CDN entrega os módulos prontos. Não precisamos de JSX ou compilação.
+    // As versões são iguais para que React e React DOM trabalhem juntos.
+    import { createElement, useState } from 'https://esm.sh/react@19.2.0';
+    import { createRoot } from 'https://esm.sh/react-dom@19.2.0/client?deps=react@19.2.0';
+
+    // Um componente é uma função que descreve o que React deve mostrar.
+    function Contador() {
+      // useState guarda um valor entre as renderizações do componente.
+      // quantidade é o valor atual; setQuantidade solicita sua atualização.
+      const [quantidade, setQuantidade] = useState(0);
+
+      // createElement recebe: tipo do elemento, propriedades e conteúdo.
+      // onClick recebe uma função, executada somente quando houver um clique.
+      return createElement('button', {
+        type: 'button',
+        onClick: function () {
+          // O atualizador recebe o último valor e devolve o próximo.
+          setQuantidade(function (valorAtual) { return valorAtual + 1; });
+        }
+      }, 'Pastéis: ' + quantidade);
+    }
+
+    // Criamos a raiz na div e pedimos a primeira renderização do componente.
+    // Cada mudança de estado faz React atualizar o texto do botão.
+    const raiz = createRoot(document.querySelector('#app'));
+    raiz.render(createElement(Contador));
+  </script>
+</body>
+</html>

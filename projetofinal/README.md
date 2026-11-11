@@ -7,6 +7,8 @@
 #### Atualização da versão 1.1
 
 - Inclusão do **Express.js** como framework do backend, executado com Node.js, para definir rotas e tratar requisições e respostas HTTP.
+- Inclusão de [exemplos didáticos](exemplos/README.md), com arquivos comentados e separados entre frontend e backend, para praticar HTML, CSS, JavaScript, Bootstrap, React, Fetch, Express, CRUD e SQLite.
+- Integração dos exemplos de backend com `banco/banco.db`, documentação das tabelas existentes e inclusão de um [roteiro de prática](exemplos/ROTEIRO.md).
 
 ### 1. Apresentação do projeto
 
@@ -109,7 +111,7 @@ O desenvolvimento utilizará como base as tecnologias trabalhadas durante o curs
 | API HTTP | Comunicação entre frontend e backend |
 | CRUD | Operações básicas de criação, leitura, atualização e exclusão de dados |
 | Roteamento | Organização dos caminhos utilizados para acessar páginas ou funcionalidades da API |
-| SQLite | Banco de dados relacional local, armazenado em um arquivo `.bd` individual para cada aluno |
+| SQLite | Banco de dados relacional local, armazenado em `banco/banco.db`, com uma cópia individual para cada aluno |
 | SQL | Criação de tabelas e execução de consultas e operações CRUD no banco de dados |
 | JSON | Formato de troca de dados entre frontend e backend, quando necessário |
 
@@ -168,7 +170,7 @@ projetofinal/
 │
 └── banco/
     ├── imagens/
-    └── dados.bd
+    └── banco.db
 ```
 
 A aplicação será organizada em três partes: **frontend, backend e banco de dados**.
@@ -189,7 +191,7 @@ A aplicação será organizada em três partes: **frontend, backend e banco de d
 | `api.js` | Rotas, operações CRUD e funcionalidades básicas do backend |
 | `banco/` | Diretório de armazenamento dos dados utilizados pela aplicação |
 | `imagens/` | Armazenamento das imagens utilizadas no cardápio e em outros elementos |
-| `dados.bd` | Banco de dados SQLite local e individual, que será implementado por cada aluno |
+| `banco.db` | Banco de dados SQLite fornecido, com produtos, clientes, pedidos e itens de pedido |
 
 Essa será a estrutura inicial obrigatória.
 
@@ -215,7 +217,7 @@ O arquivo `api.js` utilizará o Express.js e concentrará as funcionalidades bá
 - Recebimento de requisições.
 - Leitura e tratamento de dados enviados pelo frontend.
 - Execução de operações CRUD simples.
-- Consulta e atualização das informações armazenadas no banco SQLite local (`dados.bd`).
+- Consulta e atualização das informações armazenadas no banco SQLite local (`banco.db`).
 - Retorno de respostas para a interface.
 
 As operações CRUD representam quatro ações fundamentais:
@@ -231,23 +233,89 @@ Esses exemplos são apenas ilustrativos. As operações que serão efetivamente 
 
 #### 7.3 Banco de dados — Onde as informações serão armazenadas
 
-O projeto contará com um **banco de dados SQLite local**, armazenado no arquivo `banco/dados.bd`.
+O projeto conta com um **banco de dados SQLite local**, disponível no arquivo `banco/banco.db`.
 
-**Cada aluno será responsável por implementar e utilizar seu próprio banco de dados**, de forma individual e independente dos bancos dos demais alunos. O arquivo `.bd` será armazenado localmente e conterá os registros necessários ao funcionamento de sua aplicação.
+**Cada aluno utilizará sua própria cópia do banco fornecido**, de forma individual e independente dos bancos dos demais alunos. O arquivo `.db` será armazenado localmente e contém a estrutura e registros para as atividades.
 
-O SQLite é um sistema de banco de dados relacional que funciona diretamente em um arquivo, sem exigir a instalação ou configuração de um servidor de banco de dados separado. A extensão `.bd` será adotada como padrão neste projeto.
+O SQLite é um sistema de banco de dados relacional que funciona diretamente em um arquivo, sem exigir a instalação ou configuração de um servidor de banco de dados separado. A extensão adotada neste projeto é `.db`.
 
-Conforme os requisitos definidos, os alunos poderão criar tabelas para armazenar informações relacionadas a produtos, categorias, preços e pedidos, utilizando SQL para consultar e modificar os registros.
+As tabelas fornecidas armazenam produtos, clientes, pedidos e seus itens. A categoria é um campo de `produtos`. Os alunos utilizarão SQL para consultar e modificar registros, conforme os requisitos definidos.
 
 O diretório `imagens/` armazenará os arquivos de imagem utilizados pelo projeto, enquanto o banco de dados poderá guardar as referências aos respectivos arquivos.
 
 **Não será necessário utilizar servidores de banco de dados externos, como MySQL ou PostgreSQL.** O SQLite será a solução obrigatória para persistência local nesta atividade.
 
-As operações de leitura, criação, atualização e exclusão deverão ser realizadas pelo backend, que se comunicará com o banco SQLite. O frontend não acessará diretamente o arquivo `.bd`.
+As operações de leitura, criação, atualização e exclusão deverão ser realizadas pelo backend, que se comunicará com o banco SQLite. O frontend não acessará diretamente o arquivo `.db`.
 
 O JSON poderá continuar sendo utilizado para transmitir informações entre frontend e backend por meio das requisições e respostas HTTP, mas **não será utilizado como arquivo de armazenamento persistente**.
 
 A proposta é que os alunos compreendam como estruturar tabelas e como os dados podem ser armazenados, consultados e modificados em uma aplicação web.
+
+##### Estrutura das tabelas fornecidas
+
+O SQL abaixo documenta a estrutura existente em `banco/banco.db`. O banco já está pronto para uso; os exemplos abrem esse arquivo e não recriam as tabelas.
+
+| Tabela | Finalidade | Campos |
+|---|---|---|
+| `produtos` | Itens do cardápio | `id`, `nome`, `descricao`, `categoria`, `preco_centavos`, `imagem`, `disponivel` |
+| `clientes` | Identificação do cliente | `id`, `cpf`, `nome`, `telefone` |
+| `pedidos` | Atendimento, situação e pagamento simulado | `id`, `cliente_id`, `tipo`, `endereco`, `status`, `criado_em`, `pago` |
+| `itens_pedido` | Produtos e quantidades de cada pedido | `id`, `pedido_id`, `produto_id`, `quantidade`, `preco_unitario_centavos` |
+
+```sql
+CREATE TABLE produtos (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    nome TEXT NOT NULL CHECK (length(trim(nome)) > 0),
+    descricao TEXT,
+    categoria TEXT NOT NULL CHECK (length(trim(categoria)) > 0),
+    preco_centavos INTEGER NOT NULL CHECK (preco_centavos >= 0),
+    imagem TEXT,
+    disponivel INTEGER NOT NULL DEFAULT 1 CHECK (disponivel IN (0, 1))
+);
+
+CREATE TABLE clientes (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    cpf TEXT NOT NULL UNIQUE
+        CHECK (length(cpf) = 11 AND cpf NOT GLOB '*[^0-9]*'),
+    nome TEXT NOT NULL CHECK (length(trim(nome)) > 0),
+    telefone TEXT NOT NULL CHECK (length(trim(telefone)) > 0)
+);
+
+CREATE TABLE pedidos (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    cliente_id INTEGER NOT NULL,
+    tipo TEXT NOT NULL CHECK (tipo IN ('local', 'retirada', 'entrega')),
+    endereco TEXT,
+    status TEXT NOT NULL DEFAULT 'recebido'
+        CHECK (status IN ('recebido', 'em_preparo', 'pronto', 'concluido', 'cancelado')),
+    criado_em TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    pago INTEGER NOT NULL DEFAULT 0 CHECK (pago IN (0, 1)),
+    FOREIGN KEY (cliente_id) REFERENCES clientes(id) ON DELETE RESTRICT,
+    CHECK (tipo <> 'entrega' OR (endereco IS NOT NULL AND length(trim(endereco)) > 0)),
+    CHECK (status <> 'cancelado' OR pago = 0)
+);
+
+CREATE TABLE itens_pedido (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    pedido_id INTEGER NOT NULL,
+    produto_id INTEGER NOT NULL,
+    quantidade INTEGER NOT NULL CHECK (quantidade > 0),
+    preco_unitario_centavos INTEGER NOT NULL CHECK (preco_unitario_centavos >= 0),
+    UNIQUE (pedido_id, produto_id),
+    FOREIGN KEY (pedido_id) REFERENCES pedidos(id) ON DELETE CASCADE,
+    FOREIGN KEY (produto_id) REFERENCES produtos(id) ON DELETE RESTRICT
+);
+```
+
+Os preços são inteiros em **centavos**: `1000` representa R$ 10,00. `disponivel` e `pago` usam `0` para não e `1` para sim. O CPF é texto com 11 dígitos e valor único; a restrição verifica formato, sem calcular dígitos verificadores.
+
+Um cliente pode ter vários pedidos; um pedido pode ter vários itens; cada item referencia um produto. O preço unitário fica registrado no item para preservar o valor do pedido mesmo quando o preço do produto mudar. O par `pedido_id`/`produto_id` é único: a quantidade de um mesmo produto deve ser reunida no mesmo item.
+
+O banco impede excluir clientes ou produtos vinculados a pedidos. Excluir um pedido exclui seus itens em cascata. Pedidos de entrega exigem endereço; pedidos cancelados devem ter `pago = 0`. Os exemplos de escrita ativam `PRAGMA foreign_keys = ON` para respeitar esses vínculos.
+
+A tabela `sqlite_sequence` também aparece ao inspecionar o arquivo: ela é interna do SQLite e controla os ids de tabelas com `AUTOINCREMENT`.
+
+Os exemplos 01, 04, 05 e 06 consultam o banco em modo de leitura; os exemplos 02 e 03 fazem CRUD em `produtos`. A simulação do exemplo 05 consulta preço e disponibilidade e calcula um total, sem cadastrar clientes ou gravar pedidos. Veja os passos, comandos e exercícios no [roteiro](exemplos/ROTEIRO.md).
 
 #### 7.4 Comunicação entre as partes
 
@@ -257,7 +325,7 @@ O funcionamento básico poderá seguir este fluxo:
 2. O JavaScript do frontend identifica a interação.
 3. Quando necessário, o frontend envia uma requisição HTTP ao backend.
 4. O backend identifica a rota e executa a operação correspondente.
-5. Caso necessário, o backend consulta ou modifica os registros do banco SQLite local (`dados.bd`).
+5. Caso necessário, o backend consulta ou modifica os registros do banco SQLite local (`banco.db`).
 6. O backend retorna uma resposta.
 7. O frontend utiliza a resposta para atualizar as informações apresentadas ao usuário.
 
@@ -336,7 +404,7 @@ Caso optem pelo GitHub, recomenda-se:
 5. Manter o repositório atualizado durante o desenvolvimento.
 6. Ao final, adicionar uma descrição do projeto e orientações básicas para sua execução.
 
-Como cada aluno utilizará seu próprio banco SQLite local (`dados.bd`), deverão ser armazenados apenas dados fictícios ou demonstrativos, sem senhas ou informações pessoais reais. Recomenda-se versionar o código e as instruções de criação do banco, evitando publicar o arquivo local com os dados da aplicação.
+Como cada aluno utilizará sua própria cópia do banco SQLite local (`banco.db`), deverão ser armazenados apenas dados fictícios ou demonstrativos, sem senhas ou informações pessoais reais. Recomenda-se versionar o código e a estrutura do banco, verificando os dados antes de compartilhar o arquivo.
 
 **Lembrem-se:** o projeto desenvolvido durante o +TI representa o conhecimento e o esforço de vocês.
 
@@ -359,7 +427,7 @@ O projeto será conduzido progressivamente, com atividades que representem difer
 | 5 | Estruturação do projeto | Criar os diretórios e arquivos necessários |
 | 6 | Implementação do frontend | Desenvolver a estrutura visual e as interações |
 | 7 | Implementação do backend | Criar rotas, operações CRUD e funcionalidades básicas |
-| 8 | Organização do banco de dados | Criar individualmente o banco SQLite `dados.bd`, estruturar as tabelas e organizar os arquivos de imagem |
+| 8 | Organização do banco de dados | Estudar as tabelas de `banco/banco.db`, utilizar uma cópia individual e organizar os arquivos de imagem |
 | 9 | Integração | Estabelecer a comunicação entre frontend, backend e banco |
 | 10 | Testes | Verificar o funcionamento e corrigir problemas |
 | 11 | Apresentação final | Demonstrar a solução e explicar seu funcionamento |
@@ -382,7 +450,7 @@ Além da aplicação, deverão ser capazes de explicar:
 - Qual é a responsabilidade do frontend.
 - Como o backend recebe e responde às requisições.
 - Como foram implementadas as operações CRUD.
-- Como o banco SQLite individual foi estruturado e como os dados são armazenados e consultados no arquivo `.bd`.
+- Como o banco SQLite individual foi estruturado e como os dados são armazenados e consultados no arquivo `.db`.
 - Como ocorre a comunicação entre as partes da aplicação.
 - Como as funcionalidades foram testadas.
 - Quais dificuldades foram encontradas e como foram resolvidas.
@@ -405,7 +473,7 @@ Ao concluir a atividade, vocês deverão ser capazes de:
 8. Utilizar requisições HTTP para comunicação com uma API.
 9. Compreender e implementar operações CRUD básicas.
 10. Organizar o projeto separando frontend, backend e banco de dados.
-11. Criar e utilizar um banco de dados SQLite local e individual, com arquivo `.bd` e operações SQL básicas.
+11. Compreender a estrutura e utilizar um banco de dados SQLite local e individual, com arquivo `.db` e operações SQL básicas.
 12. Testar as principais funcionalidades desenvolvidas.
 13. Compreender a importância do versionamento de código.
 14. Apresentar e justificar as decisões de implementação.

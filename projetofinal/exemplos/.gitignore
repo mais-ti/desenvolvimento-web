@@ -1,0 +1,6 @@
+# Dependências instaladas apenas nesta pasta e banco criado pelo exemplo SQLite.
+backend/node_modules/
+backend/.npm-cache/
+backend/dados-exemplo.bd
+backend/dados-exemplo.bd-*
+backend/mensagem-exemplo.txt

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <!-- Estas configurações definem os acentos, o tamanho da tela e a aba. -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>02 — CSS</title>
+  <!-- style permite estudar o CSS no mesmo arquivo do HTML. -->
+  <style>
+    /* O seletor body aplica estas regras ao corpo inteiro da página. */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 24px; /* Espaço externo entre o conteúdo e a janela. */
+    }
+
+    /* O ponto seleciona todos os elementos com class="produto". */
+    .produto {
+      border: 1px solid gray; /* Linha ao redor do produto. */
+      padding: 16px; /* Espaço interno entre a borda e o conteúdo. */
+      max-width: 280px; /* Limita a largura sem impor uma largura mínima. */
+    }
+
+    /* A regra afeta somente parágrafos dentro de .produto. */
+    .produto p {
+      color: darkgreen;
+    }
+  </style>
+</head>
+<body>
+  <h1>Um produto com CSS</h1>
+  <!-- A classe conecta este elemento às regras definidas acima. -->
+  <div class="produto">
+    <h2>Pastel</h2>
+    <p>R$ 10,00</p>
+  </div>
+  <!-- Experimente trocar padding, border e color e recarregue a página. -->
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>05 — Bootstrap</title>
+  <!-- A CDN fornece o CSS pronto do Bootstrap. Este exemplo precisa de internet. -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<!-- container limita a largura; py-4 adiciona espaço vertical dentro do body. -->
+<body class="container py-4">
+  <h1>Produto com Bootstrap</h1>
+  <!-- card e card-body aplicam aparência e espaçamento sem escrever CSS próprio. -->
+  <div class="card">
+    <div class="card-body">
+      <h2 class="card-title">Pastel</h2>
+      <p class="card-text">R$ 10,00</p>
+      <!-- O botão abre o conteúdo cujo id corresponde a data-bs-target. -->
+      <button class="btn btn-primary" type="button" data-bs-toggle="collapse"
+        data-bs-target="#ingredientes" aria-expanded="false" aria-controls="ingredientes">
+        Ver ingredientes
+      </button>
+      <p class="collapse mt-3" id="ingredientes">Massa e queijo.</p>
+    </div>
+  </div>
+  <!-- O JavaScript do Bootstrap faz o collapse abrir e fechar ao clicar. -->
+  <!-- bundle inclui as dependências dos componentes interativos. -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

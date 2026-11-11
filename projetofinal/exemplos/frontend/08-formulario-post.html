@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <!-- UTF-8 permite acentos. viewport adapta a página à largura da tela. -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>08 — Formulário POST</title>
+</head>
+<body>
+  <h1>Simular um pedido</h1>
+  <p><a href="/api/produtos" target="_blank" rel="noopener">Consultar ids e preços dos produtos disponíveis</a></p>
+  <!-- Abra http://127.0.0.1:3000 com o backend 05-querystring.js rodando. -->
+  <!-- action é a rota de destino; method define como os campos serão enviados. -->
+  <!-- enctype explicita o formato de formulário que querystring.parse entende. -->
+  <form action="/pedido" method="post" enctype="application/x-www-form-urlencoded">
+    <!-- name é a chave enviada ao servidor. id conecta o campo ao seu label. -->
+    <label for="produto">Id do produto:</label>
+    <input id="produto" name="produto_id" type="number" min="1" step="1" required>
+
+    <label for="quantidade">Quantidade:</label>
+    <input id="quantidade" name="quantidade" type="number" min="1" step="1" value="1" required>
+
+    <!-- O próprio navegador envia o formulário: não precisamos de JavaScript. -->
+    <button type="submit">Simular pedido</button>
+  </form>
+  <p>O servidor consulta o preço em banco/banco.db e retorna o total em centavos. A simulação não grava um pedido.</p>
+  <!-- Use o botão Voltar do navegador para preencher e enviar outro pedido. -->
+</body>
+</html>
