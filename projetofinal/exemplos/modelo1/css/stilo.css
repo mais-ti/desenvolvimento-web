@@ -1,0 +1,140 @@
+/* Cores, fontes e espaçamentos da página. */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  color: #222;
+  background-color: #f7f7f7;
+  line-height: 1.5;
+}
+
+header {
+  background-color: #fff;
+  border-bottom-style: solid;
+  border-width: 1px;
+  border-color: #ddd;
+  padding: 18px 24px;
+  text-align: center;
+}
+
+.logo {
+  margin-bottom: 16px;
+  font-size: 23px;
+  font-weight: bold;
+}
+
+.logo span {
+  color: #ca5827;
+}
+
+.logo img {
+  width: 48px;
+  height: 48px;
+}
+
+/* A largura percentual mantém margens laterais em telas menores. */
+main {
+  width: 86%;
+  margin: 32px auto;
+}
+
+h1 {
+  margin: 0 0 6px;
+}
+
+.subtitulo {
+  color: #666;
+  margin: 0 0 24px;
+}
+
+/* Produtos e controles organizados no fluxo normal da página. */
+.item {
+  background-color: #fff;
+  padding: 18px;
+  margin-bottom: 12px;
+  border: 1px solid #e6e6e6;
+  border-radius: 8px;
+}
+
+.item h2 {
+  font-size: 17px;
+  margin: 0 0 6px;
+}
+
+.preco {
+  color: #666;
+  margin: 0;
+}
+
+.controles {
+  margin-top: 14px;
+}
+
+.controles button {
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #fafafa;
+  color: #222;
+  font-family: Arial, sans-serif;
+  font-size: 20px;
+  text-align: center;
+}
+
+.quantidade {
+  margin: 0 12px;
+}
+
+/* Resumo e envio do pedido. */
+#pedido {
+  background-color: #fff;
+  padding: 24px;
+  margin-top: 36px;
+  border: 1px solid #e6e6e6;
+  border-radius: 8px;
+}
+
+#pedido h2 {
+  margin-top: 0;
+}
+
+#lista-pedido {
+  padding-left: 20px;
+}
+
+#lista-pedido li {
+  margin-bottom: 7px;
+}
+
+.total {
+  border-top-style: solid;
+  border-width: 1px;
+  border-color: #ddd;
+  margin-top: 18px;
+  padding-top: 18px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.total span + span {
+  margin-left: 12px;
+}
+
+.botao {
+  border: none;
+  background-color: #ca5827;
+  color: #fff;
+  padding: 11px 15px;
+  border-radius: 6px;
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  text-align: center;
+  text-decoration: none;
+}
+
+#enviar {
+  margin-top: 20px;
+  width: 100%;
+  padding: 11px 0;
+}

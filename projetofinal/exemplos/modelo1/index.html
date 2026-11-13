@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Esquina do Sabor | Cardápio</title>
+     <link rel="stylesheet" href="css/stilo.css">
+</head>
+<body>
+  <header>
+       <div class="logo"><img src="imagens/logo.png" alt="Logo Esquina do Sabor" width="48" height="48"> Esquina <span>do Sabor</span></div>
+    <a href="#pedido" class="botao">Finalizar pedido</a>
+  </header>
+
+  <main>
+    <h1>Nosso cardápio</h1>
+    <p class="subtitulo">Escolha os itens e monte seu pedido.</p>
+
+    <section id="cardapio" aria-label="Itens do cardápio">
+      <!-- Os itens serão inseridos aqui pelo JavaScript. -->
+    </section>
+
+    <section id="pedido" aria-label="Resumo do pedido">
+      <h2>Resumo do pedido</h2>
+      <p id="vazio">Nenhum item adicionado.</p>
+      <ul id="lista-pedido"></ul>
+      <div class="total"><span>Total</span><span id="total">R$ 0,00</span></div>
+      <form action="https://wa.me/" method="get" target="_blank" rel="noopener noreferrer">
+        <input type="hidden" id="mensagem-whatsapp" name="text">
+        <button id="enviar" class="botao" type="submit" disabled>Finalizar pedido</button>
+      </form>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
